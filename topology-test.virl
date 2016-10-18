@@ -3,7 +3,7 @@
     <extensions>
         <entry key="AutoNetkit.enable_cdp" type="Boolean">true</entry>
     </extensions>
-    <node name="Chicago" type="SIMPLE" subtype="IOSv" location="239,235" ipv4="192.168.0.3" excludeFromLaunch="true">
+    <node name="Chicago" type="SIMPLE" subtype="IOSv" location="239,235" ipv4="192.168.0.3">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="AutoNetkit.ASN" type="Integer">10</entry>
@@ -185,7 +185,7 @@ end</entry>
         <interface id="0" name="GigabitEthernet0/1" ipv4="10.0.128.1" netPrefixLenV4="30"/>
         <interface id="1" name="GigabitEthernet0/2" ipv4="10.0.0.5" netPrefixLenV4="30"/>
     </node>
-    <node name="Dallas" type="SIMPLE" subtype="IOSv" location="240,423" ipv4="192.168.0.1" excludeFromLaunch="true">
+    <node name="Dallas" type="SIMPLE" subtype="IOSv" location="240,423" ipv4="192.168.0.1">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="AutoNetkit.ASN" type="Integer">10</entry>
@@ -367,7 +367,7 @@ end</entry>
         <interface id="0" name="GigabitEthernet0/1" ipv4="10.0.128.2" netPrefixLenV4="30"/>
         <interface id="1" name="GigabitEthernet0/2" ipv4="10.0.128.5" netPrefixLenV4="30"/>
     </node>
-    <node name="Brussels" type="SIMPLE" subtype="IOSv" location="852,243" ipv4="192.168.0.11" excludeFromLaunch="true">
+    <node name="Brussels" type="SIMPLE" subtype="IOSv" location="852,243" ipv4="192.168.0.11">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="AutoNetkit.ASN" type="Integer">30</entry>
@@ -554,7 +554,7 @@ end</entry>
         <interface id="0" name="GigabitEthernet0/1" ipv4="10.2.128.1" netPrefixLenV4="30"/>
         <interface id="1" name="GigabitEthernet0/2" ipv4="10.2.128.5" netPrefixLenV4="30"/>
     </node>
-    <node name="Paris" type="SIMPLE" subtype="IOSv" location="843,412" ipv4="192.168.0.10" excludeFromLaunch="true">
+    <node name="Paris" type="SIMPLE" subtype="IOSv" location="843,412" ipv4="192.168.0.10">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="AutoNetkit.ASN" type="Integer">30</entry>
@@ -1429,7 +1429,7 @@ end</entry>
         <interface id="2" name="GigabitEthernet0/3" ipv4="10.1.0.2" netPrefixLenV4="30"/>
         <interface id="3" name="GigabitEthernet0/4" ipv4="10.1.0.6" netPrefixLenV4="30"/>
     </node>
-    <node name="Montreal" type="SIMPLE" subtype="IOSv" location="406,170" ipv4="192.168.0.18" excludeFromLaunch="true">
+    <node name="Montreal" type="SIMPLE" subtype="IOSv" location="406,170" ipv4="192.168.0.18">
         <extensions>
             <entry key="AutoNetkit.ASN" type="Integer">20</entry>
             <entry key="AutoNetkit.RR_cluster" type="String">20</entry>
@@ -1615,7 +1615,7 @@ end</entry>
         <interface id="0" name="GigabitEthernet0/1" ipv4="10.1.128.1" netPrefixLenV4="30"/>
         <interface id="1" name="GigabitEthernet0/2" ipv4="10.1.0.1" netPrefixLenV4="30"/>
     </node>
-    <node name="Toronto" type="SIMPLE" subtype="IOSv" location="657,171" ipv4="192.168.0.19" excludeFromLaunch="true">
+    <node name="Toronto" type="SIMPLE" subtype="IOSv" location="657,171" ipv4="192.168.0.19">
         <extensions>
             <entry key="AutoNetkit.ASN" type="Integer">20</entry>
             <entry key="AutoNetkit.RR_cluster" type="String">20</entry>
