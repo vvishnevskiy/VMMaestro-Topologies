@@ -11,7 +11,7 @@
             <entry key="AutoNetkit.IGP" type="String">ospf</entry>
             <entry key="AutoNetkit.ibgp_role" type="String">RRC</entry>
             <entry key="config" type="String">!
-! Last configuration change at 03:22:41 UTC Fri Oct 14 2016
+! Last configuration change at 03:12:33 UTC Tue Oct 18 2016
 !
 version 15.6
 service timestamps debug datetime msec
@@ -90,7 +90,7 @@ interface Loopback0
 interface GigabitEthernet0/0
  description OOB Management
  vrf forwarding Mgmt-intf
- ip address 10.255.0.42 255.255.0.0
+ ip address 10.255.0.67 255.255.0.0
  duplex full
  speed auto
  media-type rj45
@@ -193,7 +193,7 @@ end</entry>
             <entry key="AutoNetkit.IGP" type="String">ospf</entry>
             <entry key="AutoNetkit.ibgp_role" type="String">RRC</entry>
             <entry key="config" type="String">!
-! Last configuration change at 03:22:45 UTC Fri Oct 14 2016
+! Last configuration change at 03:13:07 UTC Tue Oct 18 2016
 !
 version 15.6
 service timestamps debug datetime msec
@@ -272,7 +272,7 @@ interface Loopback0
 interface GigabitEthernet0/0
  description OOB Management
  vrf forwarding Mgmt-intf
- ip address 10.255.0.43 255.255.0.0
+ ip address 10.255.0.68 255.255.0.0
  duplex full
  speed auto
  media-type rj45
@@ -375,7 +375,7 @@ end</entry>
             <entry key="AutoNetkit.RR_cluster" type="String">30</entry>
             <entry key="AutoNetkit.ibgp_role" type="String">RRC</entry>
             <entry key="config" type="String">!
-! Last configuration change at 03:24:08 UTC Fri Oct 14 2016
+! Last configuration change at 03:11:33 UTC Tue Oct 18 2016
 !
 version 15.6
 service timestamps debug datetime msec
@@ -455,7 +455,7 @@ interface Loopback0
 interface GigabitEthernet0/0
  description OOB Management
  vrf forwarding Mgmt-intf
- ip address 10.255.0.46 255.255.0.0
+ ip address 10.255.0.66 255.255.0.0
  duplex full
  speed auto
  media-type rj45
@@ -562,7 +562,7 @@ end</entry>
             <entry key="AutoNetkit.RR_cluster" type="String">30</entry>
             <entry key="AutoNetkit.ibgp_role" type="String">RRC</entry>
             <entry key="config" type="String">!
-! Last configuration change at 03:24:18 UTC Fri Oct 14 2016
+! Last configuration change at 03:14:53 UTC Tue Oct 18 2016
 !
 version 15.6
 service timestamps debug datetime msec
@@ -642,7 +642,7 @@ interface Loopback0
 interface GigabitEthernet0/0
  description OOB Management
  vrf forwarding Mgmt-intf
- ip address 10.255.0.47 255.255.0.0
+ ip address 10.255.0.73 255.255.0.0
  duplex full
  speed auto
  media-type rj45
@@ -749,7 +749,7 @@ end</entry>
             <entry key="AutoNetkit.IGP" type="String">ospf</entry>
             <entry key="AutoNetkit.ibgp_role" type="String">RR</entry>
             <entry key="config" type="String">!
-! Last configuration change at 03:17:41 UTC Fri Oct 14 2016
+! Last configuration change at 03:26:28 UTC Tue Oct 18 2016
 !
 version 16.2
 service timestamps debug datetime msec
@@ -810,6 +810,12 @@ multilink bundle-name authenticated
 !
 !
 !
+crypto pki trustpoint TP-self-signed-507620441
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-507620441
+ revocation-check none
+ rsakeypair TP-self-signed-507620441
+!
 crypto pki trustpoint TP-self-signed-1879120809
  enrollment selfsigned
  subject-name cn=IOS-Self-Signed-Certificate-1879120809
@@ -817,8 +823,9 @@ crypto pki trustpoint TP-self-signed-1879120809
  rsakeypair TP-self-signed-1879120809
 !
 !
-crypto pki certificate chain TP-self-signed-1879120809
+crypto pki certificate chain TP-self-signed-507620441
  certificate self-signed 01 nvram:IOS-Self-Sig#1.cer
+crypto pki certificate chain TP-self-signed-1879120809
 !
 !
 !
@@ -826,7 +833,7 @@ crypto pki certificate chain TP-self-signed-1879120809
 !
 !
 !
-license udi pid CSR1000V sn 9F1DMIQ26IA
+license udi pid CSR1000V sn 93QG0CFFG1P
 license accept end user agreement
 license boot level ax
 diagnostic bootup level minimal
@@ -871,7 +878,7 @@ interface Loopback0
 interface GigabitEthernet1
  description OOB Management
  vrf forwarding Mgmt-intf
- ip address 10.255.0.40 255.255.0.0
+ ip address 10.255.0.72 255.255.0.0
  negotiation auto
  cdp enable
 !
@@ -980,30 +987,21 @@ end</entry>
             <entry key="AutoNetkit.RR_cluster" type="String">30</entry>
             <entry key="AutoNetkit.ibgp_role" type="String">RR</entry>
             <entry key="config" type="String">!
-! Last configuration change at 03:17:23 UTC Fri Oct 14 2016
+! Last configuration change at 03:55:50 UTC Tue Oct 18 2016
 !
 version 16.2
+service config
 service timestamps debug datetime msec
 service timestamps log datetime msec
 no platform punt-keepalive disable-kernel-core
 platform console auto
 !
-hostname London
+hostname host-10-255-0-70
 !
 boot-start-marker
 boot-end-marker
 !
 !
-vrf definition Mgmt-intf
- !
- address-family ipv4
- exit-address-family
- !
- address-family ipv6
- exit-address-family
-!
-enable secret 4 tnhtc92DXBhelxjYk8LWJrPV36S2i4ntXrpb4RFmfqY
-enable password cisco
 !
 no aaa new-model
 !
@@ -1018,12 +1016,9 @@ no aaa new-model
 
 
 
-no ip domain lookup
-ip domain name virl.info
 !
 !
 !
-ipv6 unicast-routing
 !
 !
 !
@@ -1041,15 +1036,6 @@ multilink bundle-name authenticated
 !
 !
 !
-crypto pki trustpoint TP-self-signed-2063035937
- enrollment selfsigned
- subject-name cn=IOS-Self-Signed-Certificate-2063035937
- revocation-check none
- rsakeypair TP-self-signed-2063035937
-!
-!
-crypto pki certificate chain TP-self-signed-2063035937
- certificate self-signed 01 nvram:IOS-Self-Sig#1.cer
 !
 !
 !
@@ -1057,14 +1043,14 @@ crypto pki certificate chain TP-self-signed-2063035937
 !
 !
 !
-license udi pid CSR1000V sn 9YN27ITIKZG
+!
+license udi pid CSR1000V sn 9V442J96GQA
 license accept end user agreement
 license boot level ax
 diagnostic bootup level minimal
 !
 spanning-tree extend system-id
 !
-username cisco privilege 15 secret 5 $1$G52X$oZiBVVsPFewKJreDEdEDw.
 !
 redundancy
 !
@@ -1072,7 +1058,6 @@ redundancy
 !
 !
 !
-cdp run
 !
 ! 
 !
@@ -1094,83 +1079,32 @@ cdp run
 ! 
 ! 
 !
-!
-interface Loopback0
- description Loopback
- ip address 192.168.0.9 255.255.255.255
- ip router isis 30
 !
 interface GigabitEthernet1
- description OOB Management
- vrf forwarding Mgmt-intf
- ip address 10.255.0.39 255.255.0.0
+ ip address dhcp
  negotiation auto
- cdp enable
 !
 interface GigabitEthernet2
- description to Halifax
- ip address 10.2.0.2 255.255.255.252
+ no ip address
+ shutdown
  negotiation auto
- cdp enable
 !
 interface GigabitEthernet3
- description to Brussels
- ip address 10.2.128.2 255.255.255.252
- ip router isis 30
+ no ip address
+ shutdown
  negotiation auto
- cdp enable
- isis circuit-type level-2-only
- isis network point-to-point 
- isis metric 1
 !
 interface GigabitEthernet4
- description to Paris
- ip address 10.2.0.6 255.255.255.252
- ip router isis 30
+ no ip address
+ shutdown
  negotiation auto
- cdp enable
- isis circuit-type level-2-only
- isis network point-to-point 
- isis metric 1
-!
-router isis 30
- net 49.1921.6800.0009.00
- metric-style wide
-!
-router bgp 30
- bgp router-id 192.168.0.9
- bgp log-neighbor-changes
- neighbor 10.2.0.1 remote-as 20
- neighbor 10.2.0.1 description eBGP to Halifax
- neighbor 192.168.0.10 remote-as 30
- neighbor 192.168.0.10 description rr client Paris
- neighbor 192.168.0.10 update-source Loopback0
- neighbor 192.168.0.11 remote-as 30
- neighbor 192.168.0.11 description rr client Brussels
- neighbor 192.168.0.11 update-source Loopback0
- !
- address-family ipv4
-  network 10.2.0.0 mask 255.255.0.0
-  network 192.168.0.9 mask 255.255.255.255
-  neighbor 10.2.0.1 activate
-  neighbor 10.2.0.1 send-community
-  neighbor 10.2.0.1 next-hop-self
-  neighbor 192.168.0.10 activate
-  neighbor 192.168.0.10 route-reflector-client
-  neighbor 192.168.0.10 next-hop-self
-  neighbor 192.168.0.11 activate
-  neighbor 192.168.0.11 route-reflector-client
-  neighbor 192.168.0.11 next-hop-self
- exit-address-family
 !
 !
 !
 ip forward-protocol nd
 no ip http server
-ip http secure-server
+no ip http secure-server
 !
-ip route 10.2.0.0 255.255.0.0 Null0 254
-ip ssh server algorithm authentication password
 !
 !
 !
@@ -1188,13 +1122,14 @@ control-plane
 !
 !
 line con 0
- password cisco
  stopbits 1
-line vty 0 4
- exec-timeout 720 0
- password cisco
- login local
- transport input telnet ssh
+line vty 0
+ login
+line vty 1
+ login
+ length 0
+line vty 2 4
+ login
 !
 !
 !
@@ -1215,7 +1150,7 @@ end</entry>
             <entry key="AutoNetkit.IGP" type="String">eigrp</entry>
             <entry key="AutoNetkit.ibgp_role" type="String">RR</entry>
             <entry key="config" type="String">!
-! Last configuration change at 03:22:01 UTC Fri Oct 14 2016
+! Last configuration change at 03:14:26 UTC Tue Oct 18 2016
 !
 version 15.6
 service timestamps debug datetime msec
@@ -1294,7 +1229,7 @@ interface Loopback0
 interface GigabitEthernet0/0
  description OOB Management
  vrf forwarding Mgmt-intf
- ip address 10.255.0.41 255.255.0.0
+ ip address 10.255.0.69 255.255.0.0
  duplex full
  speed auto
  media-type rj45
@@ -1437,7 +1372,7 @@ end</entry>
             <entry key="AutoNetkit.ibgp_role" type="String">RRC</entry>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">!
-! Last configuration change at 03:23:58 UTC Fri Oct 14 2016
+! Last configuration change at 03:15:10 UTC Tue Oct 18 2016
 !
 version 15.6
 service timestamps debug datetime msec
@@ -1516,7 +1451,7 @@ interface Loopback0
 interface GigabitEthernet0/0
  description OOB Management
  vrf forwarding Mgmt-intf
- ip address 10.255.0.44 255.255.0.0
+ ip address 10.255.0.71 255.255.0.0
  duplex full
  speed auto
  media-type rj45
@@ -1623,7 +1558,7 @@ end</entry>
             <entry key="AutoNetkit.ibgp_role" type="String">RRC</entry>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">!
-! Last configuration change at 03:24:02 UTC Fri Oct 14 2016
+! Last configuration change at 03:14:31 UTC Tue Oct 18 2016
 !
 version 15.6
 service timestamps debug datetime msec
@@ -1702,7 +1637,7 @@ interface Loopback0
 interface GigabitEthernet0/0
  description OOB Management
  vrf forwarding Mgmt-intf
- ip address 10.255.0.45 255.255.0.0
+ ip address 10.255.0.74 255.255.0.0
  duplex full
  speed auto
  media-type rj45
