@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<topology xmlns="http://www.cisco.com/VIRL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="0.95" xsi:schemaLocation="http://www.cisco.com/VIRL https://raw.github.com/CiscoVIRL/schema/v0.95/virl.xsd">
+    <node name="asav-1" type="SIMPLE" subtype="ASAv" location="444,205">
+        <extensions>
+            <entry key="config" type="string">! ASAv Config generated on 2016-10-18 02:59
+! by autonetkit_0.23.3
+!
+hostname asav-1
+username cisco password cisco privilege 15
+enable password cisco
+passwd cisco
+names
+!
+interface Management0/0
+  description OOB Management
+  duplex full
+  management-only
+  nameif mgmt
+  security-level 100
+  no shutdown
+  ! Configured on launch
+  no ip address
+!
+same-security-traffic permit inter-interface
+logging enable
+logging asdm informational
+user-identity default-domain LOCAL
+aaa authentication ssh console LOCAL
+http server enable
+http 0.0.0.0 0.0.0.0 mgmt
+ssh 0.0.0.0 0.0.0.0 mgmt
+telnet 0.0.0.0 0.0.0.0 mgmt
+ssh version 2
+crypto key generate rsa modulus 768
+telnet timeout 15
+console timeout 0
+username cisco password cisco privilege 15
+!
+class-map inspection_default
+ match default-inspection-traffic
+!
+!
+policy-map type inspect dns preset_dns_map
+ parameters
+  message-length maximum client auto
+  message-length maximum 512
+policy-map global_policy
+ class inspection_default
+  inspect ip-options
+  inspect netbios
+  inspect rtsp
+  inspect sunrpc
+  inspect tftp
+  inspect xdmcp
+  inspect dns preset_dns_map
+  inspect ftp
+  inspect h323 h225
+  inspect h323 ras
+  inspect rsh
+  inspect esmtp
+  inspect sqlnet
+  inspect sip
+  inspect skinny
+  inspect icmp
+  inspect http
+!
+service-policy global_policy global
+no call-home reporting anonymous
+call-home
+ profile CiscoTAC-1
+  no active
+end
+        </entry>
+            <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
+        </extensions>
+    </node>
+    <annotations/>
+</topology>
