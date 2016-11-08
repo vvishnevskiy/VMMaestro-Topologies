@@ -1,0 +1,108 @@
+! c3rack99, r1, 2014-05-19 17:53:37
+do undebug all
+no logging console
+no service config
+no ip domain-lookup
+!
+version 15.3
+no service pad
+no service timestamps debug uptime
+no service timestamps log uptime
+no service password-encryption
+!
+hostname Rack1R1
+!
+boot-start-marker
+boot-end-marker
+!
+logging buffered 4096
+no logging console
+!
+no aaa new-model
+dot11 syslog
+!
+no ip domain lookup
+ip cef
+ipv6 unicast-routing
+ipv6 cef
+!
+multilink bundle-name authenticated
+!
+license udi pid CISCO1841 sn FCZ103510L7
+archive
+ log config
+  hidekeys
+!
+redundancy
+!
+ip tcp synwait-time 5
+!
+interface Loopback0
+ ip address 10.1.1.1 255.255.255.255
+ ipv6 address FE80::1 link-local
+ ipv6 address 2001:DB8:100:100::1/128
+!
+interface Tunnel0
+ ip address 173.1.123.1 255.255.255.0
+ no ip redirects
+ ip nhrp map multicast dynamic
+ ip nhrp network-id 99
+ ip ospf network point-to-multipoint
+ ip ospf cost 1
+ ipv6 address FE80::1 link-local
+ ipv6 address 2001:DB8:100:123::1/64
+ ipv6 nhrp map multicast dynamic
+ ipv6 nhrp network-id 99
+ tunnel source Serial0/0/0
+ tunnel mode gre multipoint
+ tunnel key 100000
+!
+interface FastEthernet0/0
+ no shutdown
+ ip address 204.12.1.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ no shutdown
+ ip address 173.1.1.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface Serial0/0/0
+ no shutdown
+ ip address 204.186.13.1 255.255.255.0
+ encapsulation ppp
+ ip ospf 123 area 0
+!
+router ospf 123
+ router-id 0.0.0.1
+!
+router ospf 1
+ network 0.0.0.0 255.255.255.255 area 0
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+control-plane
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous level 0 limit 20
+line aux 0
+line vty 0 4
+ password cisco
+ login
+ transport input all
+!
+scheduler allocate 20000 1000
+!
+!
+service password-recovery
+!
+do show ip interface brief
+!
+!
+end
