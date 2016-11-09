@@ -11,7 +11,7 @@
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">!
-! Last configuration change at 04:33:24 UTC Wed Nov 9 2016
+! Last configuration change at 20:51:48 UTC Wed Nov 9 2016
 !
 version 15.6
 service timestamps debug datetime msec
@@ -59,6 +59,11 @@ ip domain name virl.info
 ip cef
 ipv6 unicast-routing
 ipv6 cef
+ipv6 dhcp pool 6POOL
+ address prefix 2001:DB8:100:36::/64 lifetime 600 300
+ dns-server 2001:DB8:100:100::1
+ domain-name ine.com
+!
 !
 multilink bundle-name authenticated
 !
@@ -92,7 +97,7 @@ interface Loopback0
 interface GigabitEthernet0/0
  description OOB Management
  vrf forwarding Mgmt-intf
- ip address 10.255.0.207 255.255.0.0
+ ip address 10.255.0.240 255.255.0.0
  duplex full
  speed auto
  media-type rj45
@@ -116,7 +121,8 @@ interface GigabitEthernet0/2.36
  encapsulation dot1Q 36
  ip address 173.1.36.3 255.255.255.192
  ipv6 address FE80::3 link-local
- ipv6 address 2001:DB8:100:36::/64 eui-64
+ ipv6 address 2001:DB8:100:36::3/64
+ ipv6 dhcp server 6POOL rapid-commit
  no cdp enable
 !
 interface GigabitEthernet0/3
@@ -187,7 +193,7 @@ end</entry>
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">!
-! Last configuration change at 04:47:53 UTC Wed Nov 9 2016
+! Last configuration change at 20:51:31 UTC Wed Nov 9 2016
 !
 version 15.6
 service timestamps debug datetime msec
@@ -230,6 +236,7 @@ mmi snmp-timeout 180
 !
 !
 !
+ip domain list ine.com
 no ip domain lookup
 ip domain name virl.info
 ip cef
@@ -268,7 +275,7 @@ interface Loopback0
 interface GigabitEthernet0/0
  description OOB Management
  vrf forwarding Mgmt-intf
- ip address 10.255.0.210 255.255.0.0
+ ip address 10.255.0.241 255.255.0.0
  duplex full
  speed auto
  media-type rj45
@@ -287,11 +294,14 @@ interface GigabitEthernet0/2
  speed auto
  media-type rj45
 !
+interface GigabitEthernet0/2.6
+ no cdp enable
+!
 interface GigabitEthernet0/2.36
  encapsulation dot1Q 36
  ip address 173.1.36.6 255.255.255.192
+ ipv6 address dhcp
  ipv6 address FE80::6 link-local
- ipv6 address autoconfig default
  no cdp enable
 !
 ip forward-protocol nd
@@ -354,7 +364,7 @@ end</entry>
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">!
-! Last configuration change at 03:49:58 UTC Wed Nov 9 2016
+! Last configuration change at 16:43:04 UTC Wed Nov 9 2016
 !
 version 15.2
 no service pad
@@ -443,7 +453,7 @@ interface GigabitEthernet0/0
  description OOB management
  no switchport
  vrf forwarding Mgmt-intf
- ip address 10.255.0.213 255.255.0.0
+ ip address 10.255.0.242 255.255.0.0
  negotiation auto
 !
 interface Vlan39
@@ -516,7 +526,7 @@ end</entry>
         <interface id="0" name="GigabitEthernet0/1"/>
         <interface id="1" name="GigabitEthernet0/2"/>
     </node>
-    <node name="R4" type="SIMPLE" subtype="IOSv" location="361,325">
+    <node name="R4" type="SIMPLE" subtype="IOSv" location="361,325" excludeFromLaunch="true">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">!
@@ -690,7 +700,7 @@ end</entry>
         <interface id="2" name="GigabitEthernet0/3"/>
         <interface id="3" name="GigabitEthernet0/4"/>
     </node>
-    <node name="R5" type="SIMPLE" subtype="IOSv" location="500,327">
+    <node name="R5" type="SIMPLE" subtype="IOSv" location="500,327" excludeFromLaunch="true">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">!
@@ -856,7 +866,7 @@ end</entry>
         <interface id="1" name="GigabitEthernet0/2"/>
         <interface id="2" name="GigabitEthernet0/3"/>
     </node>
-    <node name="Sw4" type="SIMPLE" subtype="IOSvL2" location="429,240">
+    <node name="Sw4" type="SIMPLE" subtype="IOSvL2" location="429,240" excludeFromLaunch="true">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">!
@@ -979,7 +989,7 @@ end</entry>
         <interface id="2" name="GigabitEthernet0/3"/>
         <interface id="3" name="GigabitEthernet1/0"/>
     </node>
-    <node name="Sw1" type="SIMPLE" subtype="IOSvL2" location="356,415">
+    <node name="Sw1" type="SIMPLE" subtype="IOSvL2" location="356,415" excludeFromLaunch="true">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">!
@@ -1118,7 +1128,7 @@ end</entry>
         <interface id="0" name="GigabitEthernet0/1"/>
         <interface id="1" name="GigabitEthernet0/2"/>
     </node>
-    <node name="Sw2" type="SIMPLE" subtype="IOSvL2" location="502,413">
+    <node name="Sw2" type="SIMPLE" subtype="IOSvL2" location="502,413" excludeFromLaunch="true">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">!
@@ -1231,7 +1241,7 @@ end</entry>
         <interface id="0" name="GigabitEthernet0/1"/>
         <interface id="1" name="GigabitEthernet0/2"/>
     </node>
-    <node name="DMVPN" type="SIMPLE" subtype="IOSv" location="265,238">
+    <node name="DMVPN" type="SIMPLE" subtype="IOSv" location="265,238" excludeFromLaunch="true">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">!
@@ -1408,7 +1418,7 @@ end</entry>
         <interface id="2" name="GigabitEthernet0/3"/>
         <interface id="3" name="GigabitEthernet0/4"/>
     </node>
-    <node name="R1" type="SIMPLE" subtype="IOSv" location="100,161">
+    <node name="R1" type="SIMPLE" subtype="IOSv" location="100,161" excludeFromLaunch="true">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">!
@@ -1558,7 +1568,7 @@ end</entry>
         </extensions>
         <interface id="0" name="GigabitEthernet0/1"/>
     </node>
-    <node name="R2" type="SIMPLE" subtype="IOSv" location="92,279">
+    <node name="R2" type="SIMPLE" subtype="IOSv" location="92,279" excludeFromLaunch="true">
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">!
