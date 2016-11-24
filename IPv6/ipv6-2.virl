@@ -11,7 +11,7 @@
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">!
-! Last configuration change at 03:41:03 UTC Thu Nov 17 2016
+! Last configuration change at 04:42:11 UTC Thu Nov 24 2016
 !
 version 15.6
 no service pad
@@ -123,7 +123,7 @@ interface Tunnel0
 interface GigabitEthernet0/0
  description OOB Management
  vrf forwarding Mgmt-intf
- ip address 10.255.1.55 255.255.0.0
+ ip address 10.255.1.99 255.255.0.0
  duplex full
  speed auto
  media-type rj45
@@ -172,6 +172,25 @@ router ospf 123
 !
 router ospf 1
  network 0.0.0.0 255.255.255.255 area 0
+!
+router bgp 100
+ bgp log-neighbor-changes
+ neighbor 2001:DB8:100:39::9 remote-as 300
+ neighbor FE80::4%GigabitEthernet0/1.344 remote-as 100
+ neighbor FE80::4%GigabitEthernet0/1.344 update-source GigabitEthernet0/1.344
+ !
+ address-family ipv4
+  no neighbor 2001:DB8:100:39::9 activate
+  no neighbor FE80::4%GigabitEthernet0/1.344 activate
+ exit-address-family
+ !
+ address-family ipv6
+  network 2001:DB8:100:100::3/128
+  network 2001:DB8:100:100::4/128
+  neighbor 2001:DB8:100:39::9 activate
+  neighbor FE80::4%GigabitEthernet0/1.344 activate
+  neighbor FE80::4%GigabitEthernet0/1.344 next-hop-self
+ exit-address-family
 !
 ip forward-protocol nd
 !
@@ -243,7 +262,7 @@ end</entry>
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">!
-! Last configuration change at 03:29:03 UTC Thu Nov 17 2016
+! Last configuration change at 04:43:45 UTC Thu Nov 24 2016
 !
 version 15.6
 no service pad
@@ -332,7 +351,7 @@ interface Loopback0
 interface GigabitEthernet0/0
  description OOB Management
  vrf forwarding Mgmt-intf
- ip address 10.255.1.58 255.255.0.0
+ ip address 10.255.1.107 255.255.0.0
  duplex full
  speed auto
  media-type rj45
@@ -397,6 +416,24 @@ router eigrp IPv6
 router ospf 1
  network 0.0.0.0 255.255.255.255 area 0
 !
+router bgp 100
+ bgp log-neighbor-changes
+ neighbor 2001:DB8:100:69::9 remote-as 300
+ neighbor FE80::5%GigabitEthernet0/1.456 remote-as 100
+ neighbor FE80::5%GigabitEthernet0/1.456 update-source GigabitEthernet0/1.456
+ !
+ address-family ipv4
+  no neighbor 2001:DB8:100:69::9 activate
+  no neighbor FE80::5%GigabitEthernet0/1.456 activate
+ exit-address-family
+ !
+ address-family ipv6
+  network 2001:DB8:100:100::6/128
+  neighbor 2001:DB8:100:69::9 activate
+  neighbor FE80::5%GigabitEthernet0/1.456 activate
+  neighbor FE80::5%GigabitEthernet0/1.456 next-hop-self
+ exit-address-family
+!
 ip forward-protocol nd
 !
 !
@@ -460,7 +497,7 @@ end</entry>
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">!
-! Last configuration change at 21:32:12 UTC Wed Nov 23 2016
+! Last configuration change at 04:42:49 UTC Thu Nov 24 2016
 !
 version 15.2
 no service pad
@@ -558,7 +595,7 @@ interface GigabitEthernet0/0
  description OOB management
  no switchport
  vrf forwarding Mgmt-intf
- ip address 10.255.1.94 255.255.0.0
+ ip address 10.255.1.105 255.255.0.0
  negotiation auto
 !
 interface Vlan39
@@ -657,7 +694,7 @@ end</entry>
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">!
-! Last configuration change at 21:32:02 UTC Wed Nov 23 2016
+! Last configuration change at 04:41:57 UTC Thu Nov 24 2016
 !
 version 15.6
 no service pad
@@ -746,7 +783,7 @@ interface Loopback0
 interface GigabitEthernet0/0
  description OOB Management
  vrf forwarding Mgmt-intf
- ip address 10.255.1.89 255.255.0.0
+ ip address 10.255.1.100 255.255.0.0
  duplex full
  speed auto
  media-type rj45
@@ -809,6 +846,20 @@ router ospfv3 1
 !
 router ospf 1
  network 0.0.0.0 255.255.255.255 area 0
+!
+router bgp 100
+ bgp log-neighbor-changes
+ neighbor FE80::3%GigabitEthernet0/1.344 remote-as 100
+ neighbor FE80::3%GigabitEthernet0/1.344 update-source GigabitEthernet0/1.344
+ !
+ address-family ipv4
+  no neighbor FE80::3%GigabitEthernet0/1.344 activate
+ exit-address-family
+ !
+ address-family ipv6
+  network 2001:DB8:100:100::4/128
+  neighbor FE80::3%GigabitEthernet0/1.344 activate
+ exit-address-family
 !
 ip forward-protocol nd
 !
@@ -878,7 +929,7 @@ end</entry>
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">!
-! Last configuration change at 21:32:03 UTC Wed Nov 23 2016
+! Last configuration change at 04:41:56 UTC Thu Nov 24 2016
 !
 version 15.6
 no service pad
@@ -968,7 +1019,7 @@ interface Loopback0
 interface GigabitEthernet0/0
  description OOB Management
  vrf forwarding Mgmt-intf
- ip address 10.255.1.90 255.255.0.0
+ ip address 10.255.1.101 255.255.0.0
  duplex full
  speed auto
  media-type rj45
@@ -1032,6 +1083,20 @@ router ospfv3 1
 !
 router ospf 1
  network 0.0.0.0 255.255.255.255 area 0
+!
+router bgp 100
+ bgp log-neighbor-changes
+ neighbor FE80::6%GigabitEthernet0/1.456 remote-as 100
+ neighbor FE80::6%GigabitEthernet0/1.456 update-source GigabitEthernet0/1.456
+ !
+ address-family ipv4
+  no neighbor FE80::6%GigabitEthernet0/1.456 activate
+ exit-address-family
+ !
+ address-family ipv6
+  network 2001:DB8:100:100::5/128
+  neighbor FE80::6%GigabitEthernet0/1.456 activate
+ exit-address-family
 !
 ip forward-protocol nd
 !
@@ -1099,7 +1164,7 @@ end</entry>
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">!
-! Last configuration change at 21:31:52 UTC Wed Nov 23 2016
+! Last configuration change at 04:42:38 UTC Thu Nov 24 2016
 !
 version 15.2
 no service pad
@@ -1130,7 +1195,6 @@ no aaa new-model
 !
 !
 !
-vtp domain cisco
 vtp mode transparent
 !
 !
@@ -1142,12 +1206,12 @@ ipv6 cef
 !
 !
 !
-spanning-tree mode mst
+spanning-tree mode rapid-pvst
 spanning-tree extend system-id
 !
 vlan internal allocation policy ascending
 !
-vlan 10,12-13,21-22,24,33,36,39,41,52,55,69,100,344,456 
+vlan 344,456 
 lldp run
 no cdp run
 !
@@ -1178,6 +1242,8 @@ interface GigabitEthernet0/1
  switchport mode trunk
  media-type rj45
  negotiation auto
+ spanning-tree portfast edge trunk
+ spanning-tree link-type point-to-point
 !
 interface GigabitEthernet0/2
  description to R6
@@ -1185,6 +1251,8 @@ interface GigabitEthernet0/2
  switchport mode trunk
  media-type rj45
  negotiation auto
+ spanning-tree portfast edge trunk
+ spanning-tree link-type point-to-point
 !
 interface GigabitEthernet0/3
  description to R4
@@ -1192,12 +1260,14 @@ interface GigabitEthernet0/3
  switchport mode trunk
  media-type rj45
  negotiation auto
+ spanning-tree portfast edge trunk
+ spanning-tree link-type point-to-point
 !
 interface GigabitEthernet0/0
  description OOB management
  no switchport
  vrf forwarding Mgmt-intf
- ip address 10.255.1.95 255.255.0.0
+ ip address 10.255.1.106 255.255.0.0
  negotiation auto
 !
 interface GigabitEthernet1/0
@@ -1206,6 +1276,8 @@ interface GigabitEthernet1/0
  switchport mode trunk
  media-type rj45
  negotiation auto
+ spanning-tree portfast edge trunk
+ spanning-tree link-type point-to-point
 !
 interface Vlan344
  ip address 173.1.0.10 255.255.255.240
@@ -1287,7 +1359,7 @@ end</entry>
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">!
-! Last configuration change at 21:32:04 UTC Wed Nov 23 2016
+! Last configuration change at 04:42:41 UTC Thu Nov 24 2016
 !
 version 15.2
 no service pad
@@ -1373,7 +1445,7 @@ interface GigabitEthernet0/0
  description OOB management
  no switchport
  vrf forwarding Mgmt-intf
- ip address 10.255.1.92 255.255.0.0
+ ip address 10.255.1.103 255.255.0.0
  negotiation auto
 !
 interface Vlan12
@@ -1457,7 +1529,7 @@ end</entry>
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">!
-! Last configuration change at 21:32:16 UTC Wed Nov 23 2016
+! Last configuration change at 04:42:34 UTC Thu Nov 24 2016
 !
 version 15.2
 no service pad
@@ -1556,7 +1628,7 @@ interface GigabitEthernet0/0
  description OOB management
  no switchport
  vrf forwarding Mgmt-intf
- ip address 10.255.1.93 255.255.0.0
+ ip address 10.255.1.104 255.255.0.0
  negotiation auto
 !
 interface Vlan12
@@ -1640,7 +1712,7 @@ end</entry>
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">!
-! Last configuration change at 21:31:57 UTC Wed Nov 23 2016
+! Last configuration change at 04:41:39 UTC Thu Nov 24 2016
 !
 version 15.6
 service timestamps debug datetime msec
@@ -1721,7 +1793,7 @@ interface Loopback0
 interface GigabitEthernet0/0
  description OOB Management
  vrf forwarding Mgmt-intf
- ip address 10.255.1.85 255.255.0.0
+ ip address 10.255.1.96 255.255.0.0
  duplex full
  speed auto
  media-type rj45
@@ -1816,7 +1888,7 @@ end</entry>
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">!
-! Last configuration change at 04:12:29 UTC Thu Nov 17 2016
+! Last configuration change at 04:41:58 UTC Thu Nov 24 2016
 !
 version 15.6
 no service pad
@@ -1929,7 +2001,7 @@ interface Tunnel0
 interface GigabitEthernet0/0
  description OOB Management
  vrf forwarding Mgmt-intf
- ip address 10.255.1.53 255.255.0.0
+ ip address 10.255.1.97 255.255.0.0
  duplex full
  speed auto
  media-type rj45
@@ -2021,7 +2093,7 @@ end</entry>
         <extensions>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
             <entry key="config" type="String">!
-! Last configuration change at 21:32:08 UTC Wed Nov 23 2016
+! Last configuration change at 04:42:07 UTC Thu Nov 24 2016
 !
 version 15.6
 no service pad
@@ -2138,7 +2210,7 @@ interface Tunnel0
 interface GigabitEthernet0/0
  description OOB Management
  vrf forwarding Mgmt-intf
- ip address 10.255.1.87 255.255.0.0
+ ip address 10.255.1.98 255.255.0.0
  duplex full
  speed auto
  media-type rj45
