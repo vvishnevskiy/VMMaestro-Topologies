@@ -1,0 +1,236 @@
+! Copyright (C) 2015 INE, Inc. -- All rights reserved
+! c3rack99, sw3, 2015-03-26 09:38:08
+do undebug all
+no logging console
+no service config
+no ip domain-lookup
+vtp file vlan.dat
+! VTP interface control currently not supported
+vtp mode Server
+no vtp pruning
+vtp version 
+! VTP traps generation control currently not supported
+vtp domain cisco
+do show vtp status
+do show vlan brief
+!
+no vtp password
+vlan 12
+ name VLAN0012
+vlan 22
+ name VLAN0022
+vlan 23
+ name VLAN0023
+vlan 34
+ name VLAN0034
+vlan 35
+ name VLAN0035
+vlan 39
+ name VLAN0039
+vlan 41
+ name VLAN0041
+vlan 52
+ name VLAN0052
+vlan 65
+ name VLAN0065
+vlan 69
+ name VLAN0069
+vlan 71
+ name VLAN0071
+vlan 84
+ name VLAN0084
+vlan 86
+ name VLAN0086
+vlan 91
+ name VLAN0091
+vlan 100
+ name VLAN0100
+vlan 105
+ name VLAN0105
+sdm prefer dual-ipv4-and-ipv6 default
+!
+version 12.2
+no service pad
+no service timestamps debug uptime
+no service timestamps log uptime
+no service password-encryption
+!
+hostname Rack1SW3
+!
+boot-start-marker
+boot-end-marker
+!
+no logging console
+!
+no aaa new-model
+system mtu routing 1500
+vtp file vlan.dat
+ip routing
+no ip domain-lookup
+!
+ipv6 unicast-routing
+!
+crypto pki trustpoint TP-self-signed-1832543488
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-1832543488
+ revocation-check none
+ rsakeypair TP-self-signed-1832543488
+!
+crypto pki certificate chain TP-self-signed-1832543488
+ certificate self-signed 01
+  3082023F 308201A8 A0030201 02020101 300D0609 2A864886 F70D0101 04050030
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274
+  69666963 6174652D 31383332 35343334 3838301E 170D3933 30333031 30303030
+  35395A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D31 38333235
+  34333438 3830819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281
+  8100C09E F46C6E86 501A528B 9A6665CF 017A4D26 7722DE74 F102E298 4790B5CD
+  160969E1 2B49B516 83358339 0A2B8D72 DEFCEFDC 9D8AD6A9 7FB71D83 368BF8C0
+  B03342D5 F32D3ABF 00517F16 3397E4B0 705ADB2B 53198F9D BE116075 91B6C554
+  D1B726A8 19227F41 39F3BC70 12965DE7 1EBEF7AA 7CEE4399 8662F66E D8ACE23E
+  A7E10203 010001A3 67306530 0F060355 1D130101 FF040530 030101FF 30120603
+  551D1104 0B300982 07537769 7463682E 301F0603 551D2304 18301680 14431D95
+  BCD7430D 47B3518E C28A2EBD AC93D3D6 11301D06 03551D0E 04160414 431D95BC
+  D7430D47 B3518EC2 8A2EBDAC 93D3D611 300D0609 2A864886 F70D0101 04050003
+  8181001A 9F5D904C E9EF4768 7C670693 8698BE3F 5BD04602 E4654516 26F6FB9A
+  8CEFEA5C BD4F8DAF 78914DC9 11FDF85C 54631495 7F0FBDDC 4D633388 6F558A7B
+  9400B0C8 70310C13 727D62D6 E197A858 F0B55A08 38C29B35 0214A523 B50645B3
+  5664D025 8696BAB3 AB2A35AB 69D7F1AD D5D35146 8644B06D 341A602C AC5CDE72 FC5BCE
+  quit
+!
+spanning-tree mode mst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+ip tcp synwait-time 5
+!
+interface Loopback0
+ ip address 9.9.9.9 255.255.255.255
+ ipv6 address FE80::9 link-local
+ ipv6 address 2001:DB8:100:100::9/128
+!
+interface Loopback1
+ ip address 10.1.1.10 255.255.255.0
+ ip ospf network point-to-point
+ ipv6 address FE80::9 link-local
+ ipv6 address 2001:DB8:100:9::9/64
+!
+interface FastEthernet0/1
+ no shutdown
+!
+interface FastEthernet0/2
+ no shutdown
+!
+interface FastEthernet0/3
+ no shutdown
+!
+interface FastEthernet0/4
+ no shutdown
+!
+interface FastEthernet0/5
+ no shutdown
+!
+interface FastEthernet0/6
+ no shutdown
+!
+interface FastEthernet0/7
+ no shutdown
+!
+interface FastEthernet0/8
+ no shutdown
+!
+interface FastEthernet0/9
+ no shutdown
+!
+interface FastEthernet0/10
+ no shutdown
+!
+interface FastEthernet0/11
+ no shutdown
+!
+interface FastEthernet0/12
+ no shutdown
+ switchport access vlan 13
+!
+interface FastEthernet0/13
+ no shutdown
+!
+interface FastEthernet0/14
+ no shutdown
+!
+interface FastEthernet0/15
+ no shutdown
+!
+interface FastEthernet0/16
+ no shutdown
+!
+interface FastEthernet0/17
+ no shutdown
+!
+interface FastEthernet0/18
+ no shutdown
+!
+interface FastEthernet0/19
+ no shutdown
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ shutdown
+!
+interface FastEthernet0/20
+ no shutdown
+ shutdown
+!
+interface FastEthernet0/21
+ no shutdown
+!
+interface FastEthernet0/22
+ no shutdown
+ shutdown
+!
+interface FastEthernet0/23
+ no shutdown
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface FastEthernet0/24
+ no shutdown
+ shutdown
+!
+interface GigabitEthernet0/1
+ no shutdown
+ shutdown
+!
+interface GigabitEthernet0/2
+ no shutdown
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan91
+ ip address 192.168.91.9 255.255.255.0
+ ipv6 address FE80::9 link-local
+!
+ip classless
+ip http server
+no ip http secure-server
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous level 0 limit 20
+line vty 0 4
+ password cisco
+ login
+line vty 5 15
+ login
+!
+!
+service password-recovery
+!
+do show ip interface brief
+!
+!
+end

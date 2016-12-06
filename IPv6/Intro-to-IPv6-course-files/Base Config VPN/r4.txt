@@ -1,0 +1,123 @@
+! Copyright (C) 2015 INE, Inc. -- All rights reserved
+! c3rack99, r4, 2015-03-26 09:38:07
+do undebug all
+no logging console
+no service config
+no ip domain-lookup
+!
+version 15.3
+no service pad
+no service timestamps debug uptime
+no service timestamps log uptime
+no service password-encryption
+!
+hostname Rack1R4
+!
+boot-start-marker
+boot-end-marker
+!
+aqm-register-fnf
+!
+logging buffered 4096
+no logging console
+!
+no aaa new-model
+!
+dot11 syslog
+!
+no ip domain lookup
+ip cef
+ipv6 unicast-routing
+ipv6 cef
+!
+multilink bundle-name authenticated
+!
+voice-card 0
+!
+license udi pid CISCO2811 sn FTX1023A0M3
+archive
+ log config
+  hidekeys
+!
+redundancy
+!
+ip tcp synwait-time 5
+!
+interface Loopback0
+ ip address 4.4.4.4 255.255.255.255
+ ip ospf 1 area 0
+!
+interface FastEthernet0/0
+ no shutdown
+ no ip address
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/0.34
+ encapsulation dot1Q 34
+ ip address 173.1.34.4 255.255.255.0
+ ip ospf 1 area 0
+!
+interface FastEthernet0/0.84
+ encapsulation dot1Q 84
+ ip address 192.168.84.4 255.255.255.0
+ ipv6 address FE80::4 link-local
+!
+interface FastEthernet0/1
+ no shutdown
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface Serial0/0/0
+ no shutdown
+ no ip address
+ encapsulation ppp
+ shutdown
+!
+interface Serial0/1/0
+ no shutdown
+ no ip address
+ encapsulation ppp
+ shutdown
+!
+router ospf 1
+ prefix-suppression
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+control-plane
+!
+ !
+ !
+ !
+ !
+mgcp behavior rsip-range tgcp-only
+mgcp behavior comedia-role none
+mgcp behavior comedia-check-media-src disable
+mgcp behavior comedia-sdp-force disable
+!
+mgcp profile default
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous level 0 limit 20
+line aux 0
+line vty 0 4
+ password cisco
+ login
+ transport input all
+!
+scheduler allocate 20000 1000
+!
+!
+service password-recovery
+!
+do show ip interface brief
+!
+!
+end
